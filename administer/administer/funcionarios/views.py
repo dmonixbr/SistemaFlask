@@ -84,7 +84,7 @@ def editar(id):
 
 	if edit_employer.admin.id != current_user.id:
 
-		res = make_response(jsonify({"message": "Aqui não FDP"}), 403)
+		res = make_response(jsonify({"message": "Aqui nao FDP"}), 403)
 		return res
 
 	data = request.get_json()
@@ -111,7 +111,7 @@ def exibe_all():
 
 	add_funcionario = funcionario_form()
 
-	titulo = "Todos funcionários"
+	titulo = "Todos funcionarios"
 	setor = [("0", "Equipe administrativo"), ("1", "Desenvolvedor"), ("2", "Equipe projetos"), ("3", "Equipe RH"), ("4", "Equipe marketing"), ("5", "Equipe presidencia"), ("6", "Equipe Negocios")]
 	setor = dict(setor)
 
@@ -125,7 +125,7 @@ def meus_funcionarios():
 
 	add_funcionario = funcionario_form()
 
-	titulo = "Meus funcionários"
+	titulo = "Meus funcionarios"
 	setor = [("0", "Equipe administrativo"), ("1", "Desenvolvedor"), ("2", "Equipe projetos"), ("3", "Equipe RH"), ("4", "Equipe marketing"), ("5", "Equipe presidencia"), ("6", "Equipe Negocios")]
 	setor = dict(setor)
 

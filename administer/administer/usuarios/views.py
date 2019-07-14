@@ -52,10 +52,10 @@ def adicionar():
 		return redirect(url_for('principal.index'))
 
 	if Admin.query.filter_by(username=form_add.username.data).first():
-		flash(f"Esse nome de usuário já existe.", "warning")
+		flash('Esse nome de usuario ja existe.', category="warning")
 
 	if Admin.query.filter_by(email=form_add.email.data).first():
-		flash(f"Esse e-mail já está em uso.", "warning")
+		flash('Esse e-mail ja esta em uso.', category="warning")
 
 	return redirect(url_for('principal.index'))
 
@@ -71,7 +71,7 @@ def login():
 			if user.check_password(form_login.senha.data):
 
 				login_user(user, remember=form_login.lembrar.data)
-				flash("Você foi logado com sucesso.", "success")
+				flash("Voce foi logado com sucesso.", "success")
 			
 				return redirect(url_for('usuarios.dashboard'))
 
@@ -86,7 +86,7 @@ def login():
 @login_required()
 def logout():
 	logout_user()
-	flash("Você foi deslogado com sucesso.", "success")
+	flash("Voce foi deslogado com sucesso.", "success")
 	return redirect(url_for('principal.index'))
 
 @login_required()
