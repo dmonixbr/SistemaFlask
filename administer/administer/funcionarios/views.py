@@ -1,6 +1,7 @@
 from flask import (render_template, request, Blueprint, url_for, redirect, request, flash, abort,
 					make_response, jsonify)
 from administer.funcionarios.forms import funcionario_form
+from administer.funcionarios.forms import pesquisa_func_form
 from administer.funcionarios.models import Funcionario
 from flask_login import LoginManager, current_user
 from administer import login_required, db
@@ -110,6 +111,7 @@ def editar(id):
 def exibe_all():
 
 	add_funcionario = funcionario_form()
+	pesquisa = pesquisa_func_form()
 
 	titulo = "Todos funcionarios"
 	setor = [("0", "Equipe administrativo"), ("1", "Desenvolvedor"), ("2", "Equipe projetos"), ("3", "Equipe RH"), ("4", "Equipe marketing"), ("5", "Equipe presidencia"), ("6", "Equipe Negocios")]
@@ -117,7 +119,7 @@ def exibe_all():
 
 	page = request.args.get('page', 1, type=int)
 	funcionarios = Funcionario.query.paginate(page=page, per_page=12)
-	return render_template("todos_funcionarios.html", setor=setor, titulo=titulo, funcionarios=funcionarios, add_funcionario=add_funcionario)
+	return render_template("todos_funcionarios.html", setor=setor, titulo=titulo, funcionarios=funcionarios, add_funcionario=add_funcionario,pesquisa = pesquisa)
 
 @login_required()
 @funcionarios.route("/meus_funcionarios")
