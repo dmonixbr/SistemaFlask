@@ -110,7 +110,7 @@ def editar(id):
 def exibe_all():
 
 	add_funcionario = funcionario_form()
-	pesquisa = pesquisa_func_form()
+	busca = pesquisa_func_form()
 
 	titulo = "Todos funcionarios"
 	setor = [("0", "Equipe administrativo"), ("1", "Desenvolvedor"), ("2", "Equipe projetos"), ("3", "Equipe RH"), ("4", "Equipe marketing"), ("5", "Equipe presidencia"), ("6", "Equipe Negocios")]
@@ -118,8 +118,14 @@ def exibe_all():
 
 	page = request.args.get('page', 1, type=int)
 	funcionarios = Funcionario.query.paginate(page=page, per_page=12)
-	return render_template("todos_funcionarios.html", setor=setor, titulo=titulo, funcionarios=funcionarios, add_funcionario=add_funcionario,pesquisa = pesquisa)
+	return render_template("todos_funcionarios.html", setor=setor, titulo=titulo, funcionarios=funcionarios, add_funcionario=add_funcionario,busca = busca)
 
+@login_required()
+@funcionarios.route("/busca/<pesquisa>",methods=['GET','POST'])
+def busca(pesquisa):
+	pass
+
+	
 @login_required()
 @funcionarios.route("/meus_funcionarios")
 def meus_funcionarios():

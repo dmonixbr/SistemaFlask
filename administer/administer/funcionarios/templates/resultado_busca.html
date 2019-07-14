@@ -5,13 +5,11 @@
 {% block content %}
 
   <div class="input-group mb-3">
-    <form action="#" method="GET">
     {{ busca.hidden_tag()}}
     {{ busca.pesquisa(class="form-control",placeholder="Pesquisar funcionario")}}
     <div class="input-group-append">
       {{ busca.submit(class="btn btn-outline-secondary",id="button-addon2")}}
     </div>
-    </form>
   </div>
 
   {% for employer in funcionarios.items %}
