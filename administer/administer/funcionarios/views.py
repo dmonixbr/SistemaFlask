@@ -1,7 +1,6 @@
 from flask import (render_template, request, Blueprint, url_for, redirect, request, flash, abort,
 					make_response, jsonify)
-from administer.funcionarios.forms import funcionario_form
-from administer.funcionarios.forms import pesquisa_func_form
+from administer.funcionarios.forms import funcionario_form, pesquisa_func_form
 from administer.funcionarios.models import Funcionario
 from flask_login import LoginManager, current_user
 from administer import login_required, db
