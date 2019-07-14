@@ -61,7 +61,7 @@ app.register_blueprint(funcionarios,url_prefix='/funcionarios')
 app.register_blueprint(error_pages)
 
 ####################################
-############FUNÇÕES#################
+############FUNCOES#################
 ####################################
 	
 
