@@ -122,7 +122,7 @@ def exibe_all():
 
 @login_required()
 @funcionarios.route("/busca/<string:pesquisa>",methods=['GET'])
-@funcionarios.route("/busca", methods=['GET'])
+@funcionarios.route("/busca", methods=['GET'],defaults={'pesquisa':None})
 def busca(pesquisa):
 	funcionarios = Funcionario.query.filter_by(nome = pesquisa)
 
@@ -141,6 +141,7 @@ def busca(pesquisa):
 def meus_funcionarios():
 
 	add_funcionario = funcionario_form()
+	busca = pesquisa_func_form()
 
 	titulo = "Meus funcionarios"
 	setor = [("0", "Equipe administrativo"), ("1", "Desenvolvedor"), ("2", "Equipe projetos"), ("3", "Equipe RH"), ("4", "Equipe marketing"), ("5", "Equipe presidencia"), ("6", "Equipe Negocios")]
@@ -149,7 +150,7 @@ def meus_funcionarios():
 	page = request.args.get('page', 1, type=int)
 	funcionarios = Funcionario.query.filter_by(admin_id=current_user.id).paginate(page=page, per_page=12)
 	
-	return render_template("todos_funcionarios.html", setor=setor, titulo=titulo, funcionarios=funcionarios, add_funcionario=add_funcionario)
+	return render_template("todos_funcionarios.html", setor=setor, titulo=titulo, funcionarios=funcionarios, add_funcionario=add_funcionario, busca = busca)
 
 @login_required()
 @funcionarios.route("/exibe/<int:id>")

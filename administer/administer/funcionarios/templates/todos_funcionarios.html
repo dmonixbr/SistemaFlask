@@ -6,17 +6,15 @@
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-    <form action="{{url_for('funcionarios.busca')}}">
       {{busca.hidden_tag()}}
       {{busca.submit(class="btn btn-outline-secondary",id="button-addon1",onclick="pesq(resultado,'/busca')")}}
    </div>
       {{busca.pesquisa(id="acharf",class="form-control",placeholder="Pesquisar funcionario")}}
-      </form>
   </div>
   <div id="resultado">
 
   </div>
-  <script>
+	<script>
 
 			function pesq(exibi ,endereco){
 
@@ -25,6 +23,7 @@
 				    success: function(result){
 				    	$("#"+exibi).html(result)
 			    	},
+			    })
 
 			}
 	</script>
