@@ -1,13 +1,13 @@
 {% extends "base.html"%}
 
-{%block title%} {{titulo}} {% endblock %}
+{% block title %} {{titulo}} {% endblock %}
 
 {% block content %}
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       {{busca.hidden_tag()}}
-      {{busca.submit(class="btn btn-outline-secondary",id="button-addon1",onclick="pesq(resultado,'/busca')")}}
+      {{busca.submit(class="btn btn-outline-secondary",id="button-addon1",onclick="pesq('resultado','/funcionarios/busca')")}}
    </div>
       {{busca.pesquisa(id="acharf",class="form-control",placeholder="Pesquisar funcionario")}}
   </div>
@@ -28,9 +28,14 @@
 			}
 	</script>
 
+  <div id="resultado">
+  
+  </div>
+
   {% for employer in funcionarios.items %}
 
     <!--Cards-->
+  
     <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
     <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
       <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
@@ -44,6 +49,8 @@
       </div>
     </div>
     </div>
+  
+      
     <!--Cards-->
 
   {% endfor %}

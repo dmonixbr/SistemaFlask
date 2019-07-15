@@ -23,10 +23,10 @@
 <br/>
   <div style="size: 100%;" class="text-center">
     <div class="ui pagination menu">
-  exibe_all   {% for page_num in funcionarios.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-  exibe_all       {% if funcionarios.page == page_num and page_num %}
-  exibe_all         <a class="disabled item">
-  exibe_all           {{ page_num }}
+     {% for page_num in funcionarios.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+         {% if funcionarios.page == page_num and page_num %}
+           <a class="disabled item">
+             {{ page_num }}
             </a>
           {% elif page_num %}
             <a class="active item" href="{{ url_for('funcionarios.exibe_all', page=page_num) }}">
