@@ -121,9 +121,19 @@ def exibe_all():
 	return render_template("todos_funcionarios.html", setor=setor, titulo=titulo, funcionarios=funcionarios, add_funcionario=add_funcionario,busca = busca)
 
 @login_required()
-@funcionarios.route("/busca/<pesquisa>",methods=['GET','POST'])
+@funcionarios.route("/busca/<string:pesquisa>",methods=['GET'])
+@funcionarios.route("/busca", methods=['GET'])
 def busca(pesquisa):
-	pass
+	funcionarios = Funcionario.query.filter_by(nome = pesquisa)
+
+	titulo = "Todos funcionarios"
+	setor = [("0", "Equipe administrativo"), ("1", "Desenvolvedor"), ("2", "Equipe projetos"), ("3", "Equipe RH"), ("4", "Equipe marketing"), ("5", "Equipe presidencia"), ("6", "Equipe Negocios")]
+	setor = dict(setor)
+
+	page = request.args.get('page', 1, type=int)
+	funcionarios = funcionarios.paginate(page=page,per_page=12)
+
+	return render_template('resultado_busca.html',funcionarios = funcionarios,setor = setor,titulo = titulo)
 
 	
 @login_required()

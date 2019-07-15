@@ -5,14 +5,29 @@
 {% block content %}
 
   <div class="input-group mb-3">
-    <form action="#" method="GET">
-    {{ busca.hidden_tag()}}
-    {{ busca.pesquisa(class="form-control",placeholder="Pesquisar funcionario")}}
-    <div class="input-group-append">
-      {{ busca.submit(class="btn btn-outline-secondary",id="button-addon2")}}
-    </div>
-    </form>
+    <div class="input-group-prepend">
+    <form action="{{url_for('funcionarios.busca')}}">
+      {{busca.hidden_tag()}}
+      {{busca.submit(class="btn btn-outline-secondary",id="button-addon1",onclick="pesq(resultado,'/busca')")}}
+   </div>
+      {{busca.pesquisa(id="acharf",class="form-control",placeholder="Pesquisar funcionario")}}
+      </form>
   </div>
+  <div id="resultado">
+
+  </div>
+  <script>
+
+			function pesq(exibi ,endereco){
+
+				$.ajax({type : 'GET', 
+				    url: endereco+"/"+$("#acharf").val(),
+				    success: function(result){
+				    	$("#"+exibi).html(result)
+			    	},
+
+			}
+	</script>
 
   {% for employer in funcionarios.items %}
 
@@ -37,14 +52,14 @@
 {% endblock %}
 
 
-{%  block pagination %}
+{% block pagination %}
 <br/>
   <div style="size: 100%;" class="text-center">
     <div class="ui pagination menu">
-      {% for page_num in funcionarios.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-          {% if funcionarios.page == page_num and page_num %}
-            <a class="disabled item">
-              {{ page_num }}
+     {% for page_num in funcionarios.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+         {% if funcionarios.page == page_num and page_num %}
+           <a class="disabled item">
+             {{ page_num }}
             </a>
           {% elif page_num %}
             <a class="active item" href="{{ url_for('funcionarios.exibe_all', page=page_num) }}">
