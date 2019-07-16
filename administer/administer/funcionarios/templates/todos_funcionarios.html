@@ -11,30 +11,35 @@
    </div>
       {{busca.pesquisa(id="acharf",class="form-control",placeholder="Pesquisar funcionario")}}
   </div>
-  <div id="resultado">
-
-  </div>
 	<script>
 
-			function pesq(exibi ,endereco){
+		function pesq(exibi ,endereco){
 
-				$.ajax({type : 'GET', 
-				    url: endereco+"/"+$("#acharf").val(),
-				    success: function(result){
-				    	$("#"+exibi).html(result)
-			    	},
-			    })
+			if ($("#acharf").val() === ""){
 
-			}
+      $.ajax({type : 'GET', 
+        url: endereco,
+        success: function(result){
+          $("#"+exibi).html(result)
+        },
+      })
+
+      }else{
+      $.ajax({type : 'GET', 
+        url: endereco+"/"+$("#acharf").val(),
+        success: function(result){
+          $("#"+exibi).html(result)
+          },
+        })
+      }
+  }
 	</script>
 
-  <div id="resultado">
-  
-  
-  </div>
+<div id="resultado" style="width:100%" class="row">
+
+
 
   {% for employer in funcionarios.items %}
-
     <!--Cards-->
   
     <div id="padrao" style="display:block" class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
@@ -55,6 +60,7 @@
     <!--Cards-->
 
   {% endfor %}
+  </div>
 
 {% endblock %}
 
